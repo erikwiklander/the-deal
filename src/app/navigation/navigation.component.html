@@ -3,7 +3,7 @@
       <button fxHide fxShow.xs="true" mat-icon-button (click)="sidenav.toggle()">
         <mat-icon class="md-24" aria-label="Menu">menu</mat-icon>
       </button>
-      <button mat-button style="font-size: 20px">Playground</button>
+      <button mat-button style="font-size: 20px">Firecloud Here we go!</button>
     </div>
     <div>
       <span style="font-size: 70%;"></span>
@@ -14,24 +14,28 @@
   </mat-toolbar>
 
   
-  <mat-sidenav-container class="app-container" ngStyle.xs="top: 56px;">
-    <mat-sidenav #sidenav [(mode)]="mode" [(opened)]="opened" 
-      style="box-shadow: 3px 0 6px rgba(0,0,0,.24), inset 0px 5px 6px -2px rgba(0,0,0,.24);">
+  <mat-sidenav-container class="app-container" ngStyle.xs="top: 56px;" >
+    <mat-sidenav #sidenav [(mode)]="mode" [(opened)]="opened" >
       <nav>
-        <!-- <div *ngFor="let link of links">
+        <div style="box-shadow: 3px 0 6px rgba(0,0,0,.24), inset 0px 5px 6px -2px rgba(0,0,0,.24);">
           <button 
             mat-button 
             class="app-nav-button" 
-            [routerLink]="link.link"
-            routerLinkActive="active-link" #rla="routerLinkActive"
-            [color]="rla.isActive ? 'primary' : ''">{{link.label}}</button>
-        </div> -->
+            routerLink="welcome"
+            routerLinkActive="mat-primary">Welcome</button>
+            <button 
+              mat-button 
+              class="app-nav-button" 
+              routerLink="test"
+              routerLinkActive="mat-primary">Test</button>
+      </div>
       </nav>
     </mat-sidenav>
   
-    <mat-sidenav-content style="background-color: white; padding: 20px; box-shadow: inset 0 5px 6px -2px rgba(0,0,0,.24);">
-      Cool stuff!...
-        <!-- <router-outlet></router-outlet> -->
+    <mat-sidenav-content >
+      <div style="background-color: white; padding: 20px; box-shadow: inset 0 5px 10px -2px rgba(0,0,0,.24); height: 100%;">
+        <router-outlet></router-outlet>
+      </div>
     </mat-sidenav-content>
   
   </mat-sidenav-container>
