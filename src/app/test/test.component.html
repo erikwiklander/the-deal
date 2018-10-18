@@ -1,3 +1,7 @@
 <p>
-  test works!
+  test works again!
 </p>
+
+<div *ngFor="let item of items | async">
+    <pre>{{ item | json }}</pre>
+</div>
