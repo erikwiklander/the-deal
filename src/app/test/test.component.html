@@ -5,3 +5,10 @@
 <div *ngFor="let item of items | async">
     <pre>{{ item | json }}</pre>
 </div>
+
+<mat-form-field style="width:100%">
+  <input matInput 
+    placeholder="Leave a comment" 
+    [(ngModel)]="newComment"
+    (keyup.enter)="onEnter()">
+</mat-form-field>
