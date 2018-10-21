@@ -17,15 +17,18 @@ export class MessageComponent implements OnInit {
 
   constructor(private db: AngularFirestore) {
     this.itemCollection = db.collection<Comment>('/items');
-    this.itemCollection.ref.orderBy('creationDate', 'desc').onSnapshot(
+
+    this.itemCollection.ref.orderBy('creationDate', 'asc').onSnapshot(
       querySnapshot => {
-        this.comments = [];
-        querySnapshot.forEach(
-          queryDocumentSnapshot => {
-            const c = queryDocumentSnapshot.data() as Comment;
-            c.id = queryDocumentSnapshot.id;
-            this.comments.push(c);
-          });
+        querySnapshot.docChanges().forEach(documentChange => {
+          if (documentChange.type === 'added') {
+            const c = documentChange.doc.data() as Comment;
+            c.id = documentChange.doc.id;
+            this.comments.unshift(c);
+          } else if (documentChange.type === 'removed') {
+            this.comments.splice(this.comments.findIndex(c => c.id === documentChange.doc.id), 1);
+          }
+        });
       });
    }
 
