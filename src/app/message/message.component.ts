@@ -1,6 +1,5 @@
 import { Comment } from './message.model';
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 
 @Component({
@@ -16,7 +15,7 @@ export class MessageComponent implements OnInit {
   public comments: Comment[] = [];
 
   constructor(private db: AngularFirestore) {
-    this.itemCollection = db.collection<Comment>('/items');
+    this.itemCollection = db.collection<Comment>('/comments');
 
     this.itemCollection.ref.orderBy('creationDate', 'asc').onSnapshot(
       querySnapshot => {
