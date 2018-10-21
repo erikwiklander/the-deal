@@ -21,11 +21,19 @@ export class TestComponent implements OnInit {
       querySnapshot => {
         this.comments = [];
         querySnapshot.forEach(
-          queryDocumentSnapshot => this.comments.push(queryDocumentSnapshot.data() as Comment));
+          queryDocumentSnapshot => {
+            const c = queryDocumentSnapshot.data() as Comment;
+            c.id = queryDocumentSnapshot.id;
+            this.comments.push(c);
+          });
       });
    }
 
   ngOnInit() {
+  }
+
+  onDeleteClick(comment: Comment) {
+    this.itemCollection.doc(comment.id).delete();
   }
 
   onEnter() {

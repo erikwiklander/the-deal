@@ -5,7 +5,8 @@ import { AppComponent } from './app.component';
 import { NavigationComponent } from './navigation/navigation.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule, MatCheckboxModule, MatIconModule, MatToolbarModule, MatInputModule } from '@angular/material';
+import { MatButtonModule,
+  MatCheckboxModule, MatIconModule, MatToolbarModule, MatInputModule, MatCardModule, MatMenuModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { AppRoutingModule } from './app-routing.module';
@@ -37,6 +38,8 @@ import { FormsModule } from '@angular/forms';
     AppRoutingModule,
     MatInputModule,
     FormsModule,
+    MatCardModule,
+    MatMenuModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule
   ],
