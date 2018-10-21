@@ -1,0 +1,39 @@
+<div style="display:flex">
+    <mat-form-field style="flex-grow:1; max-width: 700px;">
+        <input matInput
+          placeholder="Leave a comment" 
+          [(ngModel)]="newComment"
+          (keyup.enter)="onEnter()">
+      </mat-form-field>
+      <div>
+          <button mat-button color="primary" (click)="onEnter()" [disabled]="newComment.length===0">ADD</button>
+      </div>
+  </div>
+  <mat-card *ngFor="let comment of comments" style="margin-bottom:10px; max-width: 500px;">
+      <mat-card-subtitle>
+          {{comment.creationDate.toDate() | date:'yyyy-MM-dd HH:mm:ss'}}
+      </mat-card-subtitle>
+      <mat-card-content>
+        <div style="display:flex">
+          <div style="flex-grow:1">
+              {{ comment.comment }}
+          </div>
+          <div>
+                <button mat-icon-button [matMenuTriggerFor]="menu">
+                  <mat-icon>more_vert</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu">
+                  <button mat-menu-item (click)="onDeleteClick(comment)">
+                    <mat-icon>delete</mat-icon>
+                    <span>Delete</span>
+                  </button>
+                  <button mat-menu-item disabled>
+                    <mat-icon>edit</mat-icon>
+                    <span>Edit</span>
+                  </button>
+                </mat-menu>
+          </div>
+        </div>
+      </mat-card-content>
+  </mat-card>
+  

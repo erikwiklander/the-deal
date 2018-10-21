@@ -18,13 +18,15 @@ import { AngularFireModule } from 'angularfire2';
 
 import { environment } from '../environments/environment';
 import { FormsModule } from '@angular/forms';
+import { MessageComponent } from './message/message.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavigationComponent,
     WelcomeComponent,
-    TestComponent
+    TestComponent,
+    MessageComponent
   ],
   imports: [
     BrowserModule,

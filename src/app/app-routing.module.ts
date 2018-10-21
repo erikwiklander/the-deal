@@ -1,11 +1,11 @@
-import { TestComponent } from './test/test.component';
 import { WelcomeComponent } from './welcome/welcome.component';
+import { MessageComponent } from './message/message.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  { path: 'test', component: TestComponent },
   { path: 'welcome', component: WelcomeComponent },
+  { path: 'message', component: MessageComponent },
   { path: '**', redirectTo: '/welcome' }
 ];
 

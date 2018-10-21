@@ -1,15 +1,15 @@
-import { Comment } from './test.model';
+import { Comment } from './message.model';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 
 @Component({
   selector: 'app-test',
-  templateUrl: './test.component.html',
-  styleUrls: ['./test.component.css']
+  templateUrl: './message.component.html',
+  styleUrls: ['./message.component.css']
 })
 
-export class TestComponent implements OnInit {
+export class MessageComponent implements OnInit {
 
   public itemCollection: AngularFirestoreCollection<Comment>;
   public newComment = '';
