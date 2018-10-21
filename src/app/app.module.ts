@@ -11,7 +11,6 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { AppRoutingModule } from './app-routing.module';
 import { WelcomeComponent } from './welcome/welcome.component';
-import { TestComponent } from './test/test.component';
 
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireModule } from 'angularfire2';
@@ -25,7 +24,6 @@ import { MessageComponent } from './message/message.component';
     AppComponent,
     NavigationComponent,
     WelcomeComponent,
-    TestComponent,
     MessageComponent
   ],
   imports: [
