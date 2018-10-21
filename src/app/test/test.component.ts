@@ -12,7 +12,7 @@ import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/fires
 export class TestComponent implements OnInit {
 
   public itemCollection: AngularFirestoreCollection<Comment>;
-  public newComment: string;
+  public newComment = '';
   public comments: Comment[] = [];
 
   constructor(private db: AngularFirestore) {
@@ -37,9 +37,11 @@ export class TestComponent implements OnInit {
   }
 
   onEnter() {
-    const comment = new Comment(this.newComment);
-    this.itemCollection.add({...comment});
-    this.newComment = '';
+    if (this.newComment.length > 0) {
+      const comment = new Comment(this.newComment);
+      this.itemCollection.add({...comment});
+      this.newComment = '';
+    }
   }
 
 }

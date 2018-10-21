@@ -6,11 +6,9 @@
         (keyup.enter)="onEnter()">
     </mat-form-field>
     <div>
-        <button mat-button color="primary" (click)="onEnter()">ADD</button>
+        <button mat-button color="primary" (click)="onEnter()" [disabled]="newComment.length===0">ADD</button>
     </div>
 </div>
-
-
 <mat-card *ngFor="let comment of comments" style="margin-bottom:10px; max-width: 500px;">
     <mat-card-subtitle>
         {{comment.creationDate.toDate() | date:'yyyy-MM-dd HH:mm:ss'}}
