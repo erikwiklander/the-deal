@@ -15,7 +15,7 @@
 
   
   <mat-sidenav-container class="app-container" ngStyle.xs="top: 56px;" >
-    <mat-sidenav #sidenav [(mode)]="mode" [(opened)]="opened" >
+    <mat-sidenav #sidenav [(mode)]="mode" [(opened)]="opened" style="width: 150px">
       <nav>
         <div style="box-shadow: 3px 0 6px rgba(0,0,0,.24), inset 0px 5px 6px -2px rgba(0,0,0,.24);">
           <button 
@@ -28,6 +28,11 @@
               class="app-nav-button" 
               routerLink="message"
               routerLinkActive="mat-primary">Messages</button>
+              <button 
+              mat-button 
+              class="app-nav-button" 
+              routerLink="table"
+              routerLinkActive="mat-primary">Message Table</button>
       </div>
       </nav>
     </mat-sidenav>

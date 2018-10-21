@@ -6,7 +6,8 @@ import { NavigationComponent } from './navigation/navigation.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule,
-  MatCheckboxModule, MatIconModule, MatToolbarModule, MatInputModule, MatCardModule, MatMenuModule } from '@angular/material';
+  MatCheckboxModule,
+  MatIconModule, MatToolbarModule, MatInputModule, MatCardModule, MatMenuModule, MatTableModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { AppRoutingModule } from './app-routing.module';
@@ -18,13 +19,15 @@ import { AngularFireModule } from 'angularfire2';
 import { environment } from '../environments/environment';
 import { FormsModule } from '@angular/forms';
 import { MessageComponent } from './message/message.component';
+import { MessageTableComponent } from './message-table/message-table.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavigationComponent,
     WelcomeComponent,
-    MessageComponent
+    MessageComponent,
+    MessageTableComponent
   ],
   imports: [
     BrowserModule,
@@ -40,6 +43,7 @@ import { MessageComponent } from './message/message.component';
     FormsModule,
     MatCardModule,
     MatMenuModule,
+    MatTableModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule
   ],

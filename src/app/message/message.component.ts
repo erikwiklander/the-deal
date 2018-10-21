@@ -16,7 +16,6 @@ export class MessageComponent implements OnInit {
 
   constructor(private db: AngularFirestore) {
     this.itemCollection = db.collection<Comment>('/comments');
-
     this.itemCollection.ref.orderBy('creationDate', 'asc').onSnapshot(
       querySnapshot => {
         querySnapshot.docChanges().forEach(documentChange => {
