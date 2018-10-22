@@ -1,6 +1,7 @@
 import { Comment } from './message.model';
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
+import * as firebase from 'firebase/app';
 
 @Component({
   selector: 'app-test',
@@ -25,6 +26,10 @@ export class MessageComponent implements OnInit {
             this.comments.unshift(c);
           } else if (documentChange.type === 'removed') {
             this.comments.splice(this.comments.findIndex(c => c.id === documentChange.doc.id), 1);
+          } else if (documentChange.type === 'modified') {
+            const c = documentChange.doc.data() as Comment;
+            c.id = documentChange.doc.id;
+            this.comments[this.comments.findIndex(cc => cc.id === documentChange.doc.id)] = c;
           }
         });
       });
@@ -39,7 +44,7 @@ export class MessageComponent implements OnInit {
 
   onEnter() {
     if (this.newComment.length > 0) {
-      const comment = new Comment(this.newComment);
+      const comment = new Comment(this.newComment, firebase.firestore.FieldValue.serverTimestamp());
       this.itemCollection.add({...comment});
       this.newComment = '';
     }

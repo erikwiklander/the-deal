@@ -1,9 +1,7 @@
-
+import * as firebase from 'firebase/app';
 
 export class Comment {
-    creationDate: Date;
     public id: string;
-    constructor(public comment: string) {
-      this.creationDate = new Date();
+    constructor(public comment: string, public creationDate: firebase.firestore.FieldValue) {
     }
   }
