@@ -14,6 +14,7 @@ export class MessageComponent implements OnInit {
   public itemCollection: AngularFirestoreCollection<Comment>;
   public newComment = '';
   public comments: Comment[] = [];
+  public now: Date;
 
   constructor(private db: AngularFirestore) {
     this.itemCollection = db.collection<Comment>('/comments');
@@ -43,6 +44,7 @@ export class MessageComponent implements OnInit {
   }
 
   onEnter() {
+    this.now = new Date();
     if (this.newComment.length > 0) {
       const comment = new Comment(this.newComment, firebase.firestore.FieldValue.serverTimestamp());
       this.itemCollection.add({...comment});

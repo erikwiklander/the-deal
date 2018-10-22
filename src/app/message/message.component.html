@@ -9,10 +9,9 @@
           <button mat-button color="primary" (click)="onEnter()" [disabled]="newComment.length===0">ADD</button>
       </div>
   </div>
-  <div *ngFor="let comment of comments">
-  <mat-card *ngIf="comment.creationDate" style="margin-bottom:10px; max-width: 500px;">
+  <mat-card *ngFor="let comment of comments" style="margin-bottom:10px; max-width: 500px;">
       <mat-card-subtitle>
-          {{comment.creationDate.toDate() | date:'yyyy-MM-dd HH:mm:ss'}}
+          {{ (comment.creationDate !== null ? comment.creationDate.toDate() : now) | date:'yyyy-MM-dd HH:mm:ss'}}
       </mat-card-subtitle>
       <mat-card-content>
         <div style="display:flex">
@@ -37,6 +36,5 @@
         </div>
       </mat-card-content>
   </mat-card>
-</div>
   <div style="height: 50px;"></div>
   
