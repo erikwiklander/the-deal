@@ -15,6 +15,7 @@ export class MessageComponent implements OnInit {
   public newComment = '';
   public comments: Comment[] = [];
   public now: Date;
+  public deleted: string[] = [];
 
   constructor(private db: AngularFirestore) {
     this.itemCollection = db.collection<Comment>('/comments');
@@ -26,7 +27,11 @@ export class MessageComponent implements OnInit {
             c.id = documentChange.doc.id;
             this.comments.unshift(c);
           } else if (documentChange.type === 'removed') {
-            this.comments.splice(this.comments.findIndex(c => c.id === documentChange.doc.id), 1);
+            this.deleted.push(documentChange.doc.id);
+            setTimeout(() => {
+              this.comments.splice(this.comments.findIndex(c => c.id === documentChange.doc.id), 1);
+              this.deleted.splice(this.deleted.findIndex(id => id === documentChange.doc.id));
+            }, 1000);
           }
         });
       });

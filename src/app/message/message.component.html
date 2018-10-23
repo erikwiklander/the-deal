@@ -9,7 +9,12 @@
           <button mat-button color="primary" (click)="onEnter()" [disabled]="newComment.length===0">ADD</button>
       </div>
   </div>
-  <mat-card *ngFor="let comment of comments" style="margin-bottom:10px; max-width: 500px;" class="animated flipInX">
+  <mat-card *ngFor="let comment of comments" 
+    style="margin-bottom:10px; max-width: 500px;" 
+    [ngClass]="
+      { 'animated': true, 
+        'flipInX':deleted.indexOf(comment.id) === -1, 
+        'flipOutX':deleted.indexOf(comment.id) > -1}">
       <mat-card-subtitle>
           {{ (comment.creationDate !== null ? comment.creationDate.toDate() : now) | date:'yyyy-MM-dd HH:mm:ss'}}
       </mat-card-subtitle>
