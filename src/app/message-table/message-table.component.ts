@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AngularFirestoreCollection, AngularFirestore } from 'angularfire2/firestore';
 import { Comment } from '../message/message.model';
 import { DataSource } from '@angular/cdk/table';
 import { Observable, from } from 'rxjs';
+import { MatPaginator } from '@angular/material';
 
 @Component({
   selector: 'app-message-table',
@@ -14,10 +15,13 @@ export class MessageTableComponent implements OnInit {
 
   public itemCollection: AngularFirestoreCollection<Comment>;
 
-  displayedColumns: string[] = ['comment'];
+  displayedColumns: string[] = ['comment', 'creationDate'];
   dataSource: CommentDataSource | null;
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
   constructor(private db: AngularFirestore) {
-    this.dataSource = new CommentDataSource(db);
+    this.dataSource = new CommentDataSource(db, this.paginator);
   }
 
   ngOnInit() {
@@ -25,7 +29,7 @@ export class MessageTableComponent implements OnInit {
 }
 
 export class CommentDataSource extends DataSource<Comment> {
-  constructor(private db: AngularFirestore) {
+  constructor(private db: AngularFirestore, private paginator: MatPaginator) {
     super();
   }
   connect(): Observable<Comment[]> {

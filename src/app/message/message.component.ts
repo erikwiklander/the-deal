@@ -27,10 +27,6 @@ export class MessageComponent implements OnInit {
             this.comments.unshift(c);
           } else if (documentChange.type === 'removed') {
             this.comments.splice(this.comments.findIndex(c => c.id === documentChange.doc.id), 1);
-          } else if (documentChange.type === 'modified') {
-            const c = documentChange.doc.data() as Comment;
-            c.id = documentChange.doc.id;
-            this.comments[this.comments.findIndex(cc => cc.id === documentChange.doc.id)] = c;
           }
         });
       });
