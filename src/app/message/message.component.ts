@@ -30,7 +30,7 @@ export class MessageComponent implements OnInit {
             this.deleted.push(documentChange.doc.id);
             setTimeout(() => {
               this.comments.splice(this.comments.findIndex(c => c.id === documentChange.doc.id), 1);
-              this.deleted.splice(this.deleted.findIndex(id => id === documentChange.doc.id));
+              this.deleted.splice(this.deleted.findIndex(id => id === documentChange.doc.id), 1);
             }, 1000);
           }
         });

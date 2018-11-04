@@ -1,9 +1,10 @@
+import { switchMap, tap, combineAll, startWith } from 'rxjs/operators';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { AngularFirestoreCollection, AngularFirestore } from 'angularfire2/firestore';
+import { AngularFirestoreCollection, AngularFirestore, QueryDocumentSnapshot } from 'angularfire2/firestore';
 import { Comment } from '../message/message.model';
 import { DataSource } from '@angular/cdk/table';
-import { Observable, from } from 'rxjs';
-import { MatPaginator } from '@angular/material';
+import { Observable, from, merge } from 'rxjs';
+import { MatPaginator, MatSort } from '@angular/material';
 
 @Component({
   selector: 'app-message-table',
@@ -19,29 +20,46 @@ export class MessageTableComponent implements OnInit {
   dataSource: CommentDataSource | null;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
   constructor(private db: AngularFirestore) {
-    this.dataSource = new CommentDataSource(db, this.paginator);
   }
 
   ngOnInit() {
+    this.dataSource = new CommentDataSource(this.db, this.paginator, this.sort);
   }
 }
 
 export class CommentDataSource extends DataSource<Comment> {
-  constructor(private db: AngularFirestore, private paginator: MatPaginator) {
+
+  pageSize = 10;
+  last: any = {};
+
+  constructor(private db: AngularFirestore, private paginator: MatPaginator, private sort: MatSort) {
     super();
   }
   connect(): Observable<Comment[]> {
     const itemCollection = this.db.collection<Comment>('/comments');
-    return from(itemCollection.ref.orderBy('creationDate', 'asc').get()
-      .then(querySnapshot => querySnapshot.docs.map(doc => {
-        const c = doc.data() as Comment;
-        c.id = doc.id;
-        return c;
-      })));
+    this.sort.sortChange.subscribe(() => {
+      this.paginator.pageIndex = 0;
+      this.last = {};
+    });
+    this.sort.sortChange.subscribe(() => console.log('change!',
+      this.paginator.pageIndex * this.pageSize, this.sort.direction === 'asc' ? 'asc' : 'desc'));
+
+    return merge(this.paginator.page, this.sort.sortChange)
+      .pipe(startWith({}),
+        switchMap(() => from(itemCollection.ref.orderBy(this.sort.active,
+          this.sort.direction === 'asc' ? 'asc' : 'desc') // .startAt(this.last)
+          .limit(this.paginator.pageSize).get()
+          .then(querySnapshot => querySnapshot.docs.map(doc => {
+            this.last = doc;
+            const c = doc.data() as Comment;
+            c.id = doc.id;
+            return c;
+          })))));
   }
 
-  disconnect() {}
+  disconnect() { }
 
 }

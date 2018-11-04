@@ -8,7 +8,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule,
   MatCheckboxModule,
   MatIconModule,
-  MatToolbarModule, MatInputModule, MatCardModule, MatMenuModule, MatTableModule, MatPaginatorModule } from '@angular/material';
+  MatToolbarModule,
+  MatInputModule, MatCardModule, MatMenuModule, MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { AppRoutingModule } from './app-routing.module';
@@ -46,6 +47,7 @@ import { MessageTableComponent } from './message-table/message-table.component';
     MatMenuModule,
     MatTableModule,
     MatPaginatorModule,
+    MatSortModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule
   ],
